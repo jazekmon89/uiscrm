@@ -1,0 +1,1969 @@
+<link id="app" media="all" type="text/css" rel="stylesheet" href="https://localhost/css/app.css">
+<link href="https://fonts.googleapis.com/css?family=Cabin|Oxygen" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<script id="app" src="https://localhost/js/app.js"></script>
+
+
+<link id="bootstrap-datetimepicker" media="all" type="text/css" rel="stylesheet" href="https://localhost/css/datetimepicker/bootstrap-datetimepicker.css">
+<style>
+.claims-list td {position: relative;padding: 0;}
+</style>
+<style>
+	.required > label:after, .required > div > label:after{
+		content: '*';
+		font-size: 16px;
+		color: red;
+		font-weight: bolder;
+	}
+	.label {color: #636b6f;}
+	.form-group{position: relative;margin-bottom: 20px;}
+	.error.label-alert, .label-alert{
+		color: red;
+		text-align: left;
+		width: 100%;
+		display:block;
+		position: absolute;
+		bottom: -15px;
+	}
+	.question-disp .error{position: inherit;
+	    display: block;
+	    margin-bottom: 10px;
+	    bottom: auto!important;
+	}
+	.wrapper {background-color: transparent!important;}
+	.wrapper .option{width: 40%;display: inline-block;}
+	table.table td, table.table th{border-color: #b5bebf!important;padding-left: 0!important;}
+	button:active .cp-spinner,
+	button.disabled .cp-spinner,
+	button.spin .cp-spinner{
+		display: inline-block!important;
+	}
+	.cp-spinner {
+		display: none;
+	    width: 12px;
+	    height: 12px;
+	    box-sizing: border-box;
+	    position: relative;
+	}
+	.cp-eclipse {
+	    width: 2px;
+	    height: 2px;
+	    box-sizing: border-box;
+	    border-radius: 50%;
+	    background: #f3d53f; 
+	    margin: 10px;
+	    animation: cp-eclipse-animate 1s ease-out infinite;
+	    vertical-align: middle;
+	}
+	
+	.cp-eclipse:before {
+	    border-radius: 50%;
+	    content: " ";
+	    width: 20px;
+	    height: 20px;
+	    display: inline-block;
+	    box-sizing: border-box;
+	    border-top: solid 3px transparent;
+	    border-right: solid 3px #f3d53f;
+	    border-bottom: solid 3px transparent;
+	    border-left: solid 3px transparent;
+	    position: absolute;
+	    top: -9px;
+	    left: -9px;
+	}
+	.cp-eclipse:after {
+	    border-radius: 50%;
+	    content: " ";
+	    width: 20px;
+	    height: 20px;
+	    display: inline-block;
+	    box-sizing: border-box;
+	    border-top: solid 3px transparent;
+	    border-right: solid 3px transparent;
+	    border-bottom: solid 3px transparent;
+	    border-left: solid 3px #f3d53f;
+	    position: absolute;
+	    top: -9px;
+	    right: -9px;
+	}
+	@keyframes  cp-eclipse-animate {
+	  0% {
+	    transform: rotate(0deg);
+	  }
+	  100% {
+	    transform: rotate(360deg);
+	  }
+	}
+</style>
+<style>
+	.rfq-form .form-tabs {
+		display: inline-block;
+		margin: 0 auto;
+		list-style: none;
+	}
+	.rfq-form .tabs-wrapper {
+		display: block;
+		text-align: center;
+		position: relative;
+	}
+	.rfq-form .form-tabs .form-tab-step{
+		display: inline-block;
+		height: 60px;
+		width: 120px;
+		text-align: center;
+		position: relative;
+	}
+	.rfq-form .form-tabs .form-tab-step a{
+		display: block;
+		position: relative;
+		padding: 10px 5px;
+		margin-bottom: 15px;
+	}
+	.rfq-form .form-tabs .form-tab-step a:after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		left: 50%;
+		height: 5px;
+		background: #b1cde0;
+		bottom: -10px;
+	}
+	.rfq-form .form-tabs .form-tab-step.last a:after{
+		display: none;
+	}
+	.rfq-form .form-tabs .form-tab-step a:before {
+		content: '\f10c';
+		width: 12px;
+		height: 12px;
+		font: normal normal normal 14px/1 FontAwesome;
+		margin-left: -7px;
+		margin-bottom: -12px;
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		z-index: 10;
+		background: #f5f8fa;
+	}
+	.rfq-form .form-tabs .form-tab-step.active a:before{
+		content: "\f111";
+	}
+	.required > label:after, .required > div > label:after{
+		content: ' *';
+		font-size: 16px;
+		color: red;
+		font-weight: bolder;
+	}
+</style>
+
+<div class="rfq-form">
+	<div class="tabs-wrapper row">
+		<ul class="form-tabs">		<li class="form-tab-step " id="step-ContactDetails"><a href="#tab-ContactDetails">Contact Details</a></li>
+			<li class="form-tab-step " id="step-SituationAtRisk"><a href="#tab-SituationAtRisk">Situation at Risk</a></li>
+			<li class="form-tab-step " id="step-Vehicle"><a href="#tab-Vehicle">Vehicle</a></li>
+			<li class="form-tab-step " id="step-InsuranceOptions"><a href="#tab-InsuranceOptions">Insurance Options</a></li>
+			<li class="form-tab-step " id="step-InsuranceHistory"><a href="#tab-InsuranceHistory">Insurance History</a></li>
+			<li class="form-tab-step last" id="step-AdditionalInfo"><a href="#tab-AdditionalInfo">Additional Information</a></li>
+	</ul>
+	</div>
+	<div class="form-tab-contents row">
+		 
+		<div class="rfq-group hidden " id="tab-ContactDetails" >
+			<form method="POST" action="https://localhost/api/quotes/form/8F61A25E-1B5E-460A-969D-1BE8B0ACAB3F/83125B05-938F-432F-B272-EEAF18FBD097/validate/0F946461-C2A1-E611-902E-000C292D0644?OrganizationID=de09f4b6-c708-4f5f-a48e-432af31e4d74" accept-charset="UTF-8"><input name="_token" type="hidden" value="SBVsn0OXLlKBhATbWSdVyUEe0O753Ywqm4duP4LI">
+			<h3 class="form-tab-header col-md-10 col-md-offset-1">Contact Details</h3>
+			<div class="form-fields col-md-10 col-md-offset-1">
+									<div class="row">
+
+	<div id="requester-fields">
+		<div class="form-group required col-md-6">
+			<label for="ContactDetails-RFQ-RequesterName">Contact Person</label>
+			<input class="form-control" id="ContactDetails-RFQ-RequesterName" name="ContactDetails[RFQ][RequesterName]" type="text">
+		</div>
+		<div class="form-group required col-md-6">
+			<label for="ContactDetails-RFQ-EmailAddress">Email Address</label>
+			<input class="form-control" id="ContactDetails-RFQ-EmailAddress" name="ContactDetails[RFQ][EmailAddress]" type="email">
+		</div>
+		<div class="form-group required col-md-6">
+			<label for="ContactDetails-RFQ-PhoneNumber">Phone Number/Mobile</label>
+			<input class="form-control" id="ContactDetails-RFQ-PhoneNumber" name="ContactDetails[RFQ][PhoneNumber]" type="number">
+		</div>
+		
+				</div>
+	<div id="business-credintials" class="col-md-12">
+		<div class='row'>
+		<h4 class="col-md-12">Business Details<i class="glyphicon-asterisk"></i></h4>
+		<br />
+		<div class="form-group required col-md-6">
+			<label for="ContactDetails-Business-CompanyName">Company or Insured Name</label>
+			<input class="form-control" id="ContactDetails-Business-CompanyName" name="ContactDetails[Business][CompanyName]" type="text">
+		</div>
+		<div class="form-group required col-md-6">
+			<label for="ContactDetails-Business-BusinessStructureTypeID">Business Structure</label>
+			<select class="form-control" id="ContactDetails-Business-BusinessStructureTypeID" name="ContactDetails[Business][BusinessStructureTypeID]"><option selected="selected" value=""></option><option value="7F0DFA28-32BD-4ECB-BFC6-33068BF7099C">Partnership</option><option value="F66EF6F8-FECB-4937-A59B-3EFCA748E053">Other</option><option value="570256BF-6C24-4411-99E3-6B5BF9266276">Family Trust</option><option value="05F9A232-C882-407F-9AF6-8051DAD3341E">Company</option><option value="79DA63A2-9F1D-4DBE-9BC4-8BDD9318E349">Sole Trader</option></select>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="ContactDetails-Business-TradeName">Trading As</label>
+			<input class="form-control" id="ContactDetails-Business-TradeAs" name="ContactDetails[Business][TradeAs]" type="text">
+		</div>
+		<div class="form-group col-md-6">
+			<label for="ContactDetails-Business-AustralianBusinessNumber">ABN No.</label>
+			<input class="form-control" id="ContactDetails-Business-AustralianBusinessNumber" name="ContactDetails[Business][AustralianBusinessNumber]" type="number">
+		</div>
+		<div class="form-group required">
+			<div class="col-md-3">
+				<label for="ContactDetails-Business-IsRegisteredForGST">Registered for GST</label>
+			</div>
+			<div class="col-md-2">
+				<div class='wrapper'><div class='option'><input id="ContactDetails-Business--IsRegisteredForGST--Y" checked="checked" name="ContactDetails[Business][IsRegisteredForGST]" type="radio" value="Y"><label for="ContactDetails-Business--IsRegisteredForGST--Y" class="label yes">Yes</label></div><div class='option'><input id="ContactDetails-Business--IsRegisteredForGST--N" name="ContactDetails[Business][IsRegisteredForGST]" type="radio" value="N"><label for="ContactDetails-Business--IsRegisteredForGST--N" class="label no">No</label></div></div>
+			</div>
+			<br />
+		</div>
+		<div class="col-md-12" id="mail-address">
+			<div class="row">
+				<h4 class="col-md-12">Mailing Address<i class="glyphicon-asterisk"></i></h4>
+				<br />
+			</div>
+				<div class="row">
+	<div class="form-group col-md-6">
+		<label for="{baseKey}-UnitNumber">Unit No.</label>
+		<input class="form-control" id="ContactDetails-mail_addr-UnitNumber" name="ContactDetails[mail_addr][UnitNumber]" type="number">
+	</div>
+	<div class="form-group required col-md-6">
+		<label for="ContactDetails-mail_addr-StreetNumber">Street No.</label>
+		<input class="form-control" id="ContactDetails-mail_addr-StreetNumber" name="ContactDetails[mail_addr][StreetNumber]" type="number">
+	</div>
+	<div class="form-group required col-md-6">
+		<label for="ContactDetails-mail_addr-StreetName">Street Name</label>
+		<input class="form-control" id="ContactDetails-mail_addr-StreetName" name="ContactDetails[mail_addr][StreetName]" type="text">
+	</div>
+	<div class="form-group required col-md-6">
+		<label for="ContactDetails-mail_addr-City">City</label>
+		<input class="form-control" id="ContactDetails-mail_addr-City" name="ContactDetails[mail_addr][City]" type="text">
+	</div>
+	<div class="form-group required col-md-5">
+		<label for="ContactDetails-mail_addr-Country">Country</label>
+		<input class="form-control" id="ContactDetails-mail_addr-Country" name="ContactDetails[mail_addr][Country]" type="text">
+	</div>
+	<div class="form-group required col-md-3">
+		<label for="ContactDetails-mail_addr-Postcode">Postcode</label>
+		<input class="form-control" id="ContactDetails-mail_addr-Postcode" name="ContactDetails[mail_addr][Postcode]" type="text">
+	</div>
+	<div class="form-group required col-md-4">
+		<label for="ContactDetails-mail_addr-State">State</label>
+		<input class="form-control" id="ContactDetails-mail_addr-State" name="ContactDetails[mail_addr][State]" type="text">
+	</div>
+</div>			
+		</div>
+		</div>
+	</div>
+	</div>
+
+
+
+							</div>
+			<div class="form-footer col-md-10 col-md-offset-1">
+				<div class="form-group button-group">
+					<button class='btn btn-info btn-back'>Back <i class='cp-spinner cp-eclipse '></i></button>
+										<button class='btn btn-success btn-submit submit'>Continue <i class='cp-spinner cp-eclipse '></i></button>
+				</div>
+			</div>
+			</form>
+		</div>
+	 
+		<div class="rfq-group hidden " id="tab-SituationAtRisk" >
+			<form method="POST" action="https://localhost/api/quotes/form/8F61A25E-1B5E-460A-969D-1BE8B0ACAB3F/83125B05-938F-432F-B272-EEAF18FBD097/validate/10946461-C2A1-E611-902E-000C292D0644?OrganizationID=de09f4b6-c708-4f5f-a48e-432af31e4d74" accept-charset="UTF-8"><input name="_token" type="hidden" value="SBVsn0OXLlKBhATbWSdVyUEe0O753Ywqm4duP4LI">
+			<h3 class="form-tab-header col-md-10 col-md-offset-1">Situation at Risk</h3>
+			<div class="form-fields col-md-10 col-md-offset-1">
+									<div class="form row">
+	<div class='questions' id='grp-situation_at_risk'>
+		<div class="SelectOne BusinessBaseLocation required" 
+		 
+			data-formpath="SituationAtRisk"
+			id="qid-35946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="SituationAtRisk-35946461-C2A1-E611-902E-000C292D0644">Business operated from</label>
+				
+				<i class="label label-default">(e.g. Home, Industrial Area, Partner&#039;s address, Shop address, Other)</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="SituationAtRisk-35946461-C2A1-E611-902E-000C292D0644" name="SituationAtRisk[35946461-C2A1-E611-902E-000C292D0644]"><option value="0B946461-C2A1-E611-902E-000C292D0644">Home</option><option value="0C946461-C2A1-E611-902E-000C292D0644">Industrial Area</option><option value="0D946461-C2A1-E611-902E-000C292D0644">Partners address</option><option value="0E946461-C2A1-E611-902E-000C292D0644">Shop Address</option><option value="0F946461-C2A1-E611-902E-000C292D0644">Other</option></select>
+
+					</div>
+			
+	</div>
+		<div class="Address BusinessAddress required" 
+		 
+			data-formpath="SituationAtRisk"
+			id="qid-36946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644">Business Address</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<div class="row">
+	<div class="form-group col-md-6">
+		<label for="{baseKey}-UnitNumber">Unit No.</label>
+		<input class="form-control" id="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-UnitNumber" name="SituationAtRisk[36946461-C2A1-E611-902E-000C292D0644][UnitNumber]" type="number">
+	</div>
+	<div class="form-group required col-md-6">
+		<label for="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-StreetNumber">Street No.</label>
+		<input class="form-control" id="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-StreetNumber" name="SituationAtRisk[36946461-C2A1-E611-902E-000C292D0644][StreetNumber]" type="number">
+	</div>
+	<div class="form-group required col-md-6">
+		<label for="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-StreetName">Street Name</label>
+		<input class="form-control" id="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-StreetName" name="SituationAtRisk[36946461-C2A1-E611-902E-000C292D0644][StreetName]" type="text">
+	</div>
+	<div class="form-group required col-md-6">
+		<label for="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-City">City</label>
+		<input class="form-control" id="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-City" name="SituationAtRisk[36946461-C2A1-E611-902E-000C292D0644][City]" type="text">
+	</div>
+	<div class="form-group required col-md-5">
+		<label for="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-Country">Country</label>
+		<input class="form-control" id="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-Country" name="SituationAtRisk[36946461-C2A1-E611-902E-000C292D0644][Country]" type="text">
+	</div>
+	<div class="form-group required col-md-3">
+		<label for="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-Postcode">Postcode</label>
+		<input class="form-control" id="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-Postcode" name="SituationAtRisk[36946461-C2A1-E611-902E-000C292D0644][Postcode]" type="text">
+	</div>
+	<div class="form-group required col-md-4">
+		<label for="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-State">State</label>
+		<input class="form-control" id="SituationAtRisk-36946461-C2A1-E611-902E-000C292D0644-State" name="SituationAtRisk[36946461-C2A1-E611-902E-000C292D0644][State]" type="text">
+	</div>
+</div>
+					</div>
+			
+	</div>
+		<div class="SelectOne BusinessOperationAge required" 
+		 
+			data-formpath="SituationAtRisk"
+			id="qid-3B946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="SituationAtRisk-3B946461-C2A1-E611-902E-000C292D0644">How long has the business been operating?</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="SituationAtRisk-3B946461-C2A1-E611-902E-000C292D0644" name="SituationAtRisk[3B946461-C2A1-E611-902E-000C292D0644]"><option value="20946461-C2A1-E611-902E-000C292D0644">New</option><option value="21946461-C2A1-E611-902E-000C292D0644">1 to 2 Years</option><option value="22946461-C2A1-E611-902E-000C292D0644">3 to 5 Years</option><option value="23946461-C2A1-E611-902E-000C292D0644">6 to 10 Years</option><option value="24946461-C2A1-E611-902E-000C292D0644">More 10 Years</option></select>
+
+					</div>
+			
+	</div>
+		<div class="Number AnnualGrossTurnover required" 
+		 
+			data-formpath="SituationAtRisk"
+			id="qid-3C946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="SituationAtRisk-3C946461-C2A1-E611-902E-000C292D0644">Annual Gross Turnover</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="SituationAtRisk-3C946461-C2A1-E611-902E-000C292D0644" name="SituationAtRisk[3C946461-C2A1-E611-902E-000C292D0644]" type="number">
+
+					</div>
+			
+	</div>
+		<div class="Number FullTimeStaffCount required" 
+		 
+			data-formpath="SituationAtRisk"
+			id="qid-3D946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="SituationAtRisk-3D946461-C2A1-E611-902E-000C292D0644">Full Time</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="SituationAtRisk-3D946461-C2A1-E611-902E-000C292D0644" name="SituationAtRisk[3D946461-C2A1-E611-902E-000C292D0644]" type="number">
+
+					</div>
+			
+	</div>
+		<div class="Number PartTimeStaffCount required" 
+		 
+			data-formpath="SituationAtRisk"
+			id="qid-3E946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="SituationAtRisk-3E946461-C2A1-E611-902E-000C292D0644">Part Time</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="SituationAtRisk-3E946461-C2A1-E611-902E-000C292D0644" name="SituationAtRisk[3E946461-C2A1-E611-902E-000C292D0644]" type="number">
+
+					</div>
+			
+	</div>
+		<div class="Text InterestedPartyName required" 
+		 
+			data-formpath="SituationAtRisk"
+			id="qid-43946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="SituationAtRisk-43946461-C2A1-E611-902E-000C292D0644">Name of Interested Party</label>
+				
+				<i class="label label-default">Need OriginalLoanAmount &amp; OutstandingLoanAmount to create a useful Liability; Need RepaymentAmount &amp; Period to create a useful Expense.</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="SituationAtRisk-43946461-C2A1-E611-902E-000C292D0644" name="SituationAtRisk[43946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		
+						
+	</div>
+	
+
+	</div>	
+							</div>
+			<div class="form-footer col-md-10 col-md-offset-1">
+				<div class="form-group button-group">
+					<button class='btn btn-info btn-back'>Back <i class='cp-spinner cp-eclipse '></i></button>
+										<button class='btn btn-success btn-submit submit'>Continue <i class='cp-spinner cp-eclipse '></i></button>
+				</div>
+			</div>
+			</form>
+		</div>
+	 
+		<div class="rfq-group hidden " id="tab-Vehicle" >
+			<form method="POST" action="https://localhost/api/quotes/form/8F61A25E-1B5E-460A-969D-1BE8B0ACAB3F/83125B05-938F-432F-B272-EEAF18FBD097/validate/11946461-C2A1-E611-902E-000C292D0644?OrganizationID=de09f4b6-c708-4f5f-a48e-432af31e4d74" accept-charset="UTF-8"><input name="_token" type="hidden" value="SBVsn0OXLlKBhATbWSdVyUEe0O753Ywqm4duP4LI">
+			<h3 class="form-tab-header col-md-10 col-md-offset-1">Vehicle</h3>
+			<div class="form-fields col-md-10 col-md-offset-1">
+									<div class="form row">
+	<div class="panel-group" id='grp-vehicle'>
+							<div class='panel panel-default questions repeatable odd' 
+				data-repeat-match='Vehicle'
+				data-repeat-title=".panel-title a"
+				data-repeat-index=0
+				id="Vehicle-0-x"
+				>
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" href='#Vehicle-0-toggle'>Vehicle #1</a>
+						<button data-remove='#Vehicle-0-x' class="pull-right"><i class="fa fa-trash-o">&nbsp;</i></button>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse in" id="Vehicle-0-toggle" data-toggle-area="collapse">
+					<div class="panel-body">
+						<div class="SelectOne MotorVehicle_ParkedLocationType required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-54946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-54946461-C2A1-E611-902E-000C292D0644">Where is the vehicle parked?</label>
+				
+				<i class="label label-default">&quot;Other&quot; is a choice</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="Vehicle-0-54946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][54946461-C2A1-E611-902E-000C292D0644]"><option value="C1946461-C2A1-E611-902E-000C292D0644">Garaged / Secure parking</option><option value="C2946461-C2A1-E611-902E-000C292D0644">Driveway / on the property</option><option value="C3946461-C2A1-E611-902E-000C292D0644">Carport</option><option value="C4946461-C2A1-E611-902E-000C292D0644">Street</option><option value="C5946461-C2A1-E611-902E-000C292D0644">Other</option></select>
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicle_VehicleRegistrationNumber required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-55946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-55946461-C2A1-E611-902E-000C292D0644">Vehicle Registration</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-55946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][55946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicle_VIN required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-56946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-56946461-C2A1-E611-902E-000C292D0644">VIN / Chassis Number</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-56946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][56946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicle_EngineNumber required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-57946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-57946461-C2A1-E611-902E-000C292D0644">Engine Number</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-57946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][57946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="SelectOne MotorVehicle_VehicleType required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-58946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-58946461-C2A1-E611-902E-000C292D0644">Vehicle Type</label>
+				
+				<i class="label label-default">Other&#039; is a choice</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="Vehicle-0-58946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][58946461-C2A1-E611-902E-000C292D0644]"><option value="C6946461-C2A1-E611-902E-000C292D0644">Van</option><option value="C7946461-C2A1-E611-902E-000C292D0644">Ute</option><option value="C8946461-C2A1-E611-902E-000C292D0644">Trailer</option><option value="C9946461-C2A1-E611-902E-000C292D0644">Caravan Modified</option><option value="CA946461-C2A1-E611-902E-000C292D0644">Other</option></select>
+
+					</div>
+			
+	</div>
+		<div class="Number MotorVehicle_ManufactureYear required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-59946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-59946461-C2A1-E611-902E-000C292D0644">Vehicle Year</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-59946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][59946461-C2A1-E611-902E-000C292D0644]" type="number">
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicle_Make required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-5A946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-5A946461-C2A1-E611-902E-000C292D0644">Vehicle Make</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-5A946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][5A946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicle_Model required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-5B946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-5B946461-C2A1-E611-902E-000C292D0644">Vehicle Model</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-5B946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][5B946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="SelectOne MotorVehicle_TransmissionType required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-5C946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-5C946461-C2A1-E611-902E-000C292D0644">Transmission</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="Vehicle-0-5C946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][5C946461-C2A1-E611-902E-000C292D0644]"><option value="CB946461-C2A1-E611-902E-000C292D0644">Manual 4 speed</option><option value="CC946461-C2A1-E611-902E-000C292D0644">Manual 5 speed</option><option value="CD946461-C2A1-E611-902E-000C292D0644">Manual 6 speed</option><option value="CE946461-C2A1-E611-902E-000C292D0644">Manual 7 speed</option><option value="CF946461-C2A1-E611-902E-000C292D0644">Automatic</option><option value="D0946461-C2A1-E611-902E-000C292D0644">Not Applicable</option></select>
+
+					</div>
+			
+	</div>
+		<div class="SelectMulti MotorVehicle_AntiTheftDevices required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-5D946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-5D946461-C2A1-E611-902E-000C292D0644">Anti-Theft Devices</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<div class='wrapper'><div class='option'><input id="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D1946461-C2A1-E611-902E-000C292D0644-" name="Vehicle[0][5D946461-C2A1-E611-902E-000C292D0644][D1946461-C2A1-E611-902E-000C292D0644]" type="checkbox" value="D1946461-C2A1-E611-902E-000C292D0644"><label for="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D1946461-C2A1-E611-902E-000C292D0644-" class="label immobiliser">Immobiliser</label></div><div class='option'><input id="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D2946461-C2A1-E611-902E-000C292D0644-" name="Vehicle[0][5D946461-C2A1-E611-902E-000C292D0644][D2946461-C2A1-E611-902E-000C292D0644]" type="checkbox" value="D2946461-C2A1-E611-902E-000C292D0644"><label for="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D2946461-C2A1-E611-902E-000C292D0644-" class="label data_dot">Data Dot</label></div><div class='option'><input id="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D3946461-C2A1-E611-902E-000C292D0644-" name="Vehicle[0][5D946461-C2A1-E611-902E-000C292D0644][D3946461-C2A1-E611-902E-000C292D0644]" type="checkbox" value="D3946461-C2A1-E611-902E-000C292D0644"><label for="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D3946461-C2A1-E611-902E-000C292D0644-" class="label alarm_system">Alarm System</label></div><div class='option'><input id="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D4946461-C2A1-E611-902E-000C292D0644-" name="Vehicle[0][5D946461-C2A1-E611-902E-000C292D0644][D4946461-C2A1-E611-902E-000C292D0644]" type="checkbox" value="D4946461-C2A1-E611-902E-000C292D0644"><label for="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D4946461-C2A1-E611-902E-000C292D0644-" class="label tow_barlockingdevicesincludingpadlock">Tow Bar locking devices including padlock</label></div><div class='option'><input id="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D5946461-C2A1-E611-902E-000C292D0644-" name="Vehicle[0][5D946461-C2A1-E611-902E-000C292D0644][D5946461-C2A1-E611-902E-000C292D0644]" type="checkbox" value="D5946461-C2A1-E611-902E-000C292D0644"><label for="Vehicle-0--5D946461-C2A1-E611-902E-000C292D0644--D5946461-C2A1-E611-902E-000C292D0644-" class="label other">Other</label></div></div>
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicle_AntiTheftDeviceOther required isLinked hidden" 
+		 
+			data-linked="{&quot;5D946461-C2A1-E611-902E-000C292D0644&quot;:[&quot;D5946461-C2A1-E611-902E-000C292D0644&quot;]}"
+		 
+			data-formpath="Vehicle.0"
+			id="qid-5E946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-5E946461-C2A1-E611-902E-000C292D0644">Other Anti-Theft Device</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-5E946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][5E946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="Boolean HasInterestedParties required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-5F946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-5F946461-C2A1-E611-902E-000C292D0644">Interested Parties (e.g. Finance)</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<div class="col-md-2">
+					<div class='wrapper'><div class='option'><input id="Vehicle-0--5F946461-C2A1-E611-902E-000C292D0644--Y" checked="checked" name="Vehicle[0][5F946461-C2A1-E611-902E-000C292D0644]" type="radio" value="Y"><label for="Vehicle-0--5F946461-C2A1-E611-902E-000C292D0644--Y" class="label yes">Yes</label></div><div class='option'><input id="Vehicle-0--5F946461-C2A1-E611-902E-000C292D0644--N" name="Vehicle[0][5F946461-C2A1-E611-902E-000C292D0644]" type="radio" value="N"><label for="Vehicle-0--5F946461-C2A1-E611-902E-000C292D0644--N" class="label no">No</label></div></div>
+				</div>
+					</div>
+			
+	</div>
+		<div class="SelectOne MotorVehicle_InterestedPartyType required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-60946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-60946461-C2A1-E611-902E-000C292D0644">Interested Party Type</label>
+				
+				<i class="label label-default">Need OriginalLoanAmount &amp; OutstandingLoanAmount to create a useful Liability; Need RepaymentAmount &amp; Period to create a useful Expense. Q) What Expense categories for financed and for leased vehicles?</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="Vehicle-0-60946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][60946461-C2A1-E611-902E-000C292D0644]"><option value="D6946461-C2A1-E611-902E-000C292D0644">Bank/Financial Institution</option><option value="D7946461-C2A1-E611-902E-000C292D0644">Lessor</option><option value="D8946461-C2A1-E611-902E-000C292D0644">Other</option></select>
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicle_InterestedPartyTypeOther required isLinked hidden" 
+		 
+			data-linked="{&quot;60946461-C2A1-E611-902E-000C292D0644&quot;:&quot;D8946461-C2A1-E611-902E-000C292D0644&quot;}"
+		 
+			data-formpath="Vehicle.0"
+			id="qid-61946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-61946461-C2A1-E611-902E-000C292D0644">Other Interested Party Type</label>
+				
+				<i class="label label-default">Only displayed if MotorVehicle_InterestedPartyType=&quot;Other&quot;</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-61946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][61946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicleInsur_OtherInfo required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-62946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-62946461-C2A1-E611-902E-000C292D0644">Other Information</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-62946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][62946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="SelectOne MotorVehicleInsur_ReplacementType required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-70946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-70946461-C2A1-E611-902E-000C292D0644">Motor vehicle cover details</label>
+				
+				<i class="label label-default">Agreed or Market Value; per-vehicle</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="Vehicle-0-70946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][70946461-C2A1-E611-902E-000C292D0644]"><option value="D9946461-C2A1-E611-902E-000C292D0644">Agreed Value</option><option value="DA946461-C2A1-E611-902E-000C292D0644">Market Value</option></select>
+
+					</div>
+			
+	</div>
+		<div class="Number MotorVehicleInsur_SumInsured required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-71946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-71946461-C2A1-E611-902E-000C292D0644">Sum Insured (Including fit out and equipment)</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-71946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][71946461-C2A1-E611-902E-000C292D0644]" type="number">
+
+					</div>
+			
+	</div>
+		<div class="SelectOne MotorVehicleInsur_NoClaimBonus required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-72946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-72946461-C2A1-E611-902E-000C292D0644">Current No Claim Bonus</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="Vehicle-0-72946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][72946461-C2A1-E611-902E-000C292D0644]"><option value="DB946461-C2A1-E611-902E-000C292D0644">0%</option><option value="DC946461-C2A1-E611-902E-000C292D0644">10%</option><option value="DD946461-C2A1-E611-902E-000C292D0644">20%</option><option value="DE946461-C2A1-E611-902E-000C292D0644">30%</option><option value="DF946461-C2A1-E611-902E-000C292D0644">40%</option><option value="E0946461-C2A1-E611-902E-000C292D0644">50%</option><option value="E1946461-C2A1-E611-902E-000C292D0644">60%</option><option value="E2946461-C2A1-E611-902E-000C292D0644">Max Discount</option></select>
+
+					</div>
+			
+	</div>
+		<div class="Date MotorVehicleInsur_DriverBirthDate required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-73946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-73946461-C2A1-E611-902E-000C292D0644">Date of Birth of Regular Driver</label>
+					</div>
+		<div class="col-md-12 form-group" >
+			
+									<div class="input-group date">
+					<input class="form-control" id="Vehicle-0-73946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][73946461-C2A1-E611-902E-000C292D0644]" type="datetime">
+									<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+				</div>
+					</div>
+			
+	</div>
+		<div class="Boolean MotorVehicleInsur_WantNoClaimBonusProtection required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-74946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-74946461-C2A1-E611-902E-000C292D0644">No Claim Bonus Protection</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<div class="col-md-2">
+					<div class='wrapper'><div class='option'><input id="Vehicle-0--74946461-C2A1-E611-902E-000C292D0644--Y" checked="checked" name="Vehicle[0][74946461-C2A1-E611-902E-000C292D0644]" type="radio" value="Y"><label for="Vehicle-0--74946461-C2A1-E611-902E-000C292D0644--Y" class="label yes">Yes</label></div><div class='option'><input id="Vehicle-0--74946461-C2A1-E611-902E-000C292D0644--N" name="Vehicle[0][74946461-C2A1-E611-902E-000C292D0644]" type="radio" value="N"><label for="Vehicle-0--74946461-C2A1-E611-902E-000C292D0644--N" class="label no">No</label></div></div>
+				</div>
+					</div>
+			
+	</div>
+		<div class="Boolean MotorVehicleInsur_WantWindscreenExcessWaiver required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-75946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-75946461-C2A1-E611-902E-000C292D0644">Windscreen Excess Waiver</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<div class="col-md-2">
+					<div class='wrapper'><div class='option'><input id="Vehicle-0--75946461-C2A1-E611-902E-000C292D0644--Y" checked="checked" name="Vehicle[0][75946461-C2A1-E611-902E-000C292D0644]" type="radio" value="Y"><label for="Vehicle-0--75946461-C2A1-E611-902E-000C292D0644--Y" class="label yes">Yes</label></div><div class='option'><input id="Vehicle-0--75946461-C2A1-E611-902E-000C292D0644--N" name="Vehicle[0][75946461-C2A1-E611-902E-000C292D0644]" type="radio" value="N"><label for="Vehicle-0--75946461-C2A1-E611-902E-000C292D0644--N" class="label no">No</label></div></div>
+				</div>
+					</div>
+			
+	</div>
+		<div class="SelectOne LossOfIncomeBenefitPerWeek required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-76946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-76946461-C2A1-E611-902E-000C292D0644">Weekly Benefits</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<select class="form-control" id="Vehicle-0-76946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][76946461-C2A1-E611-902E-000C292D0644]"><option value="E3946461-C2A1-E611-902E-000C292D0644">$2,000</option><option value="E4946461-C2A1-E611-902E-000C292D0644">Other</option></select>
+
+					</div>
+			
+	</div>
+		<div class="Number LossOfIncomeBenefitPerWeekOther required isLinked hidden" 
+		 
+			data-linked="{&quot;76946461-C2A1-E611-902E-000C292D0644&quot;:&quot;E4946461-C2A1-E611-902E-000C292D0644&quot;}"
+		 
+			data-formpath="Vehicle.0"
+			id="qid-77946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-77946461-C2A1-E611-902E-000C292D0644">Weekly Benefits - Other</label>
+				
+				<i class="label label-default">Only displayed if LossOfIncomeBenefitPerWeek=&quot;Other&quot;</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-77946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][77946461-C2A1-E611-902E-000C292D0644]" type="number">
+
+					</div>
+			
+	</div>
+		<div class="Text MotorVehicleInsur_AdditionalInsuranceCover required" 
+		 
+			data-formpath="Vehicle.0"
+			id="qid-7F946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="Vehicle-0-7F946461-C2A1-E611-902E-000C292D0644">Please describe the covers you require below:</label>
+				
+				<i class="label label-default">(similar to AdditionalComments for the other policy types) For specifying after-market accessories and modifications.</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="Vehicle-0-7F946461-C2A1-E611-902E-000C292D0644" name="Vehicle[0][7F946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+	
+						<div class="sub-group">
+													</div>	
+					</div>
+					<!-- <div class="panel-footer"></div> -->
+				</div>
+			</div>
+					</div>
+
+	
+
+	</div>	
+							</div>
+			<div class="form-footer col-md-10 col-md-offset-1">
+				<div class="form-group button-group">
+					<button class='btn btn-info btn-back'>Back <i class='cp-spinner cp-eclipse '></i></button>
+					<button 
+	id=""
+	class='btn btn-info btn-repeat' 
+	data-repeat="#grp-vehicle .questions"
+	data-repeat-container="#grp-vehicle"
+>+ Vehicle <i class='cp-spinner cp-eclipse '></i>
+</button>					<button class='btn btn-success btn-submit submit'>Continue <i class='cp-spinner cp-eclipse '></i></button>
+				</div>
+			</div>
+			</form>
+		</div>
+	 
+		<div class="rfq-group hidden " id="tab-InsuranceOptions" >
+			<form method="POST" action="https://localhost/api/quotes/form/8F61A25E-1B5E-460A-969D-1BE8B0ACAB3F/83125B05-938F-432F-B272-EEAF18FBD097/validate/16946461-C2A1-E611-902E-000C292D0644?OrganizationID=de09f4b6-c708-4f5f-a48e-432af31e4d74" accept-charset="UTF-8"><input name="_token" type="hidden" value="SBVsn0OXLlKBhATbWSdVyUEe0O753Ywqm4duP4LI">
+			<h3 class="form-tab-header col-md-10 col-md-offset-1">Insurance Options</h3>
+			<div class="form-fields col-md-10 col-md-offset-1">
+									<div class="form row">
+	<div class='questions' id='grp-insurance_options'>
+				
+							<div class="sub-groups" >
+											<div 
+		class="sub-group " 
+		id="sub-group-SpecifiedPortableValuable"
+				data-formpath="InsuranceOptions"
+		>
+		<h4>SpecifiedPortableValuable</h4>
+		<div class="panel-group" id='grp-specified_portable_valuable'>
+							<div class='panel panel-default questions repeatable odd' 
+				data-repeat-match='InsuranceOptions.SpecifiedPortableValuable'
+				data-repeat-title=".panel-title a"
+				data-repeat-index=0
+				id="InsuranceOptions-SpecifiedPortableValuable-0-x"
+				>
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" href='#InsuranceOptions-SpecifiedPortableValuable-0-toggle'>SpecifiedPortableValuable #1</a>
+						<button data-remove='#InsuranceOptions-SpecifiedPortableValuable-0-x' class="pull-right"><i class="fa fa-trash-o">&nbsp;</i></button>
+					</h4>
+				</div>
+				<div class="panel-collapse collapse in" id="InsuranceOptions-SpecifiedPortableValuable-0-toggle" data-toggle-area="collapse">
+					<div class="panel-body">
+						<div class="Text PortableValuableItem_Description required" 
+		 
+			data-formpath="InsuranceOptions.SpecifiedPortableValuable.0"
+			id="qid-7C946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="InsuranceOptions-SpecifiedPortableValuable-0-7C946461-C2A1-E611-902E-000C292D0644">Item Description</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="InsuranceOptions-SpecifiedPortableValuable-0-7C946461-C2A1-E611-902E-000C292D0644" name="InsuranceOptions[SpecifiedPortableValuable][0][7C946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		<div class="Number PortableValuableItem_BookValue required" 
+		 
+			data-formpath="InsuranceOptions.SpecifiedPortableValuable.0"
+			id="qid-7D946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="InsuranceOptions-SpecifiedPortableValuable-0-7D946461-C2A1-E611-902E-000C292D0644">Value</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="InsuranceOptions-SpecifiedPortableValuable-0-7D946461-C2A1-E611-902E-000C292D0644" name="InsuranceOptions[SpecifiedPortableValuable][0][7D946461-C2A1-E611-902E-000C292D0644]" type="number">
+
+					</div>
+			
+	</div>
+	
+						<div class="sub-group">
+													</div>	
+					</div>
+					<!-- <div class="panel-footer"></div> -->
+				</div>
+			</div>
+					</div>
+
+	
+	</div>
+	
+									</div>	
+						
+	</div>
+	
+
+			<div class="partials">
+							<h3 class="col-md-12">Insurance coverage</h3>
+																									<div class="cover-set required" style="display:inline-block;">
+			<div class="col-md-4">
+				<label for="Covers-Set">Total fit out/contents/stocks sum insured 
+ (Cost of replacement in today&#039;s value)</label>
+			</div>
+			<div class="col-md-8">	
+				<select id="Covers-Set" name="Covers[Set]"><option value="93A90503-1AC8-4509-A882-6D52F446BCA6">Contents &amp; Stock - less than $150,000</option><option value="291FCF2E-3B68-4DA7-96D4-07C3F6CF8071">Contents &amp; Stock - $150,001 to $300,000</option><option value="7224D373-52B3-43B4-A28C-CF9271CA4248">Contents &amp; Stock - $300,001 to $600,000</option><option value="71B2CE25-893A-4ABE-9550-D4BF2484A3AF">Contents &amp; Stock - $600,000+</option></select>
+			</div>
+			
+			<div class="cover-set-levels col-md-12">	
+								<div class="cover-set-level hidden" id="cover-set-level-93A90503-1AC8-4509-A882-6D52F446BCA6">
+					<h4><b class="cover-set">Contents &amp; Stock - less than $150,000</b> (Automatically covered for the following options)</h4>
+					<table class="table col-md-12">
+						<thead>
+							<tr>
+								<th class="col-md-4">Insured for</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+														<tr>
+								<td>Business Interruption</td>
+								<td>60% Gross Income Coverage</td>									
+							</tr>
+														<tr>
+								<td>Money</td>
+								<td>$3,000</td>									
+							</tr>
+														<tr>
+								<td>Deterioration of Stock</td>
+								<td>$5,000</td>									
+							</tr>
+														<tr>
+								<td>Glass</td>
+								<td>Includes Signage to $8,000</td>									
+							</tr>
+														<tr>
+								<td>Theft</td>
+								<td>$15,000</td>									
+							</tr>
+														<tr>
+								<td>Tax Audit</td>
+								<td>$20,000</td>									
+							</tr>
+														<tr>
+								<td>Public and Product Liability</td>
+								<td>$20,000,000</td>									
+							</tr>
+														<tr>
+								<td>Marine Transit</td>
+								<td>$25,000</td>									
+							</tr>
+														<tr>
+								<td>Electronic and Machinery Breakdown</td>
+								<td>Policy Limit Based on Contents &amp; Stock i.e. $150,000</td>									
+							</tr>
+													</tbody>
+					</table>	
+
+				</div>
+							<div class="cover-set-level hidden" id="cover-set-level-291FCF2E-3B68-4DA7-96D4-07C3F6CF8071">
+					<h4><b class="cover-set">Contents &amp; Stock - $150,001 to $300,000</b> (Automatically covered for the following options)</h4>
+					<table class="table col-md-12">
+						<thead>
+							<tr>
+								<th class="col-md-4">Insured for</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+														<tr>
+								<td>Business Interruption</td>
+								<td>60% Gross Income Coverage</td>									
+							</tr>
+														<tr>
+								<td>Deterioration of Stock</td>
+								<td>$5,000</td>									
+							</tr>
+														<tr>
+								<td>Glass</td>
+								<td>Includes Signage to $8,000</td>									
+							</tr>
+														<tr>
+								<td>Money</td>
+								<td>$10,000</td>									
+							</tr>
+														<tr>
+								<td>Theft</td>
+								<td>$20,000</td>									
+							</tr>
+														<tr>
+								<td>Tax Audit</td>
+								<td>$20,000</td>									
+							</tr>
+														<tr>
+								<td>Public and Product Liability</td>
+								<td>$20,000,000</td>									
+							</tr>
+														<tr>
+								<td>Marine Transit</td>
+								<td>$25,000</td>									
+							</tr>
+														<tr>
+								<td>Electronic and Machinery Breakdown</td>
+								<td>Policy Limit Based on Contents &amp; Stock i.e. $300,000</td>									
+							</tr>
+													</tbody>
+					</table>	
+
+				</div>
+							<div class="cover-set-level hidden" id="cover-set-level-7224D373-52B3-43B4-A28C-CF9271CA4248">
+					<h4><b class="cover-set">Contents &amp; Stock - $300,001 to $600,000</b> (Automatically covered for the following options)</h4>
+					<table class="table col-md-12">
+						<thead>
+							<tr>
+								<th class="col-md-4">Insured for</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+														<tr>
+								<td>Business Interruption</td>
+								<td>60% Gross Income Coverage</td>									
+							</tr>
+														<tr>
+								<td>Deterioration of Stock</td>
+								<td>$7,500</td>									
+							</tr>
+														<tr>
+								<td>Glass</td>
+								<td>Includes Signage to $8,000</td>									
+							</tr>
+														<tr>
+								<td>Money</td>
+								<td>$15,000</td>									
+							</tr>
+														<tr>
+								<td>Tax Audit</td>
+								<td>$20,000</td>									
+							</tr>
+														<tr>
+								<td>Public and Product Liability</td>
+								<td>$20,000,000</td>									
+							</tr>
+														<tr>
+								<td>Marine Transit</td>
+								<td>$25,000</td>									
+							</tr>
+														<tr>
+								<td>Theft</td>
+								<td>$25,000</td>									
+							</tr>
+														<tr>
+								<td>Electronic and Machinery Breakdown</td>
+								<td>Policy Limit Based on Contents &amp; Stock i.e. $600,000</td>									
+							</tr>
+													</tbody>
+					</table>	
+
+				</div>
+							<div class="cover-set-level hidden" id="cover-set-level-71B2CE25-893A-4ABE-9550-D4BF2484A3AF">
+					<h4><b class="cover-set">Contents &amp; Stock - $600,000+</b> (Automatically covered for the following options)</h4>
+					<table class="table col-md-12">
+						<thead>
+							<tr>
+								<th class="col-md-4">Insured for</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+														<tr>
+								<td>Business Interruption</td>
+								<td>60% Gross Income Coverage</td>									
+							</tr>
+														<tr>
+								<td>Deterioration of Stock</td>
+								<td>$7,500</td>									
+							</tr>
+														<tr>
+								<td>Glass</td>
+								<td>Includes Signage to $8,000</td>									
+							</tr>
+														<tr>
+								<td>Money</td>
+								<td>$15,000</td>									
+							</tr>
+														<tr>
+								<td>Tax Audit</td>
+								<td>$20,000</td>									
+							</tr>
+														<tr>
+								<td>Public and Product Liability</td>
+								<td>$20,000,000</td>									
+							</tr>
+														<tr>
+								<td>Marine Transit</td>
+								<td>$25,000</td>									
+							</tr>
+														<tr>
+								<td>Theft</td>
+								<td>$25,000</td>									
+							</tr>
+														<tr>
+								<td>Electronic and Machinery Breakdown</td>
+								<td>Policy Limit Based on Contents &amp; Stock i.e. $600,000</td>									
+							</tr>
+													</tbody>
+					</table>	
+
+				</div>
+						</div>	
+		</div>
+				<div class="covers-covers">
+										
+										
+										
+										
+										
+										
+						<div class='covers-displayed'>
+							<div class="covers-cover form-group  ">
+				<label for="Covers-Cover-FAF8BCBA-C50D-48C4-859E-1708631C5759" class="col-md-4">General Property (Portable Valuables)</label>
+									<input id="Covers-Cover-FAF8BCBA-C50D-48C4-859E-1708631C5759" name="Covers[Cover][FAF8BCBA-C50D-48C4-859E-1708631C5759]" type="checkbox">
+							</div>
+						<div class="covers-cover form-group required ">
+				<label for="Covers-Cover-131690AA-8995-4465-B142-594675197A6E" class="col-md-4">Public and Product Liability</label>
+				 	
+					<select id="Covers-Cover-131690AA-8995-4465-B142-594675197A6E" name="Covers[Cover][131690AA-8995-4465-B142-594675197A6E]"><option value="2B956461-C2A1-E611-902E-000C292D0644">$10,000,000</option><option value="C5A3D617-B1FE-43EA-9690-26AC3ABC2DE4">$20,000,000</option></select>
+							</div>
+						<div class="covers-cover form-group  ">
+				<label for="Covers-Cover-B82A5355-31AD-4D5A-A69F-8871D65D26A6" class="col-md-4">Electronic and Machinery Breakdown</label>
+				 	
+					<select id="Covers-Cover-B82A5355-31AD-4D5A-A69F-8871D65D26A6" name="Covers[Cover][B82A5355-31AD-4D5A-A69F-8871D65D26A6]"><option value="2C956461-C2A1-E611-902E-000C292D0644">$20,000</option><option value="28EEE743-4680-490B-B385-9CCEBBDCB683">Policy Limit Based on Contents &amp; Stock i.e. $150,000</option><option value="52BC8CF8-A998-4C44-AFF3-D951C7A8CBD0">Policy Limit Based on Contents &amp; Stock i.e. $300,000</option><option value="FF74EEF7-0B09-411A-8169-0BF3B607BBF6">Policy Limit Based on Contents &amp; Stock i.e. $600,000</option><option value="F26126F6-A986-4897-BDD1-45278585BAB5">Policy Limit Based on Contents &amp; Stock i.e. $600,000</option></select>
+							</div>
+						</div>
+			<div class='covers-hidden'>
+				<div class='col-md-12 hidden-trigger'>
+					<input id="Covers-Cover-optional-trigger" name="Covers[Cover][optional-trigger]" type="checkbox">
+					<label for="Covers-Cover-optional-trigger">Click here to see optional covers</label>
+				</div>
+				<hr style="height:1px;width:100%;background:#b5bebf;"/>
+							<div class="covers-cover form-group  hidden">
+				<label for="Covers-Cover-F2603D03-4D96-443A-9067-C492C061693E" class="col-md-4">Motor Vehicle</label>
+									<input id="Covers-Cover-F2603D03-4D96-443A-9067-C492C061693E" name="Covers[Cover][F2603D03-4D96-443A-9067-C492C061693E]" type="checkbox">
+							</div>
+						<div class="covers-cover form-group  hidden">
+				<label for="Covers-Cover-65E6F282-4734-496F-B482-EFDEEE754771" class="col-md-4">Business Interruption</label>
+				 	
+					<select id="Covers-Cover-65E6F282-4734-496F-B482-EFDEEE754771" name="Covers[Cover][65E6F282-4734-496F-B482-EFDEEE754771]"><option value="6C6A6752-9617-49EF-A789-58D22BFA122D">60% Gross Income Coverage</option></select>
+							</div>
+						<div class="covers-cover form-group  hidden">
+				<label for="Covers-Cover-417EFDE7-60F8-42E8-8A65-F26F2CA9D8DB" class="col-md-4">Workers Compensation</label>
+									<input id="Covers-Cover-417EFDE7-60F8-42E8-8A65-F26F2CA9D8DB" name="Covers[Cover][417EFDE7-60F8-42E8-8A65-F26F2CA9D8DB]" type="checkbox">
+							</div>
+						
+			</div>
+		</div>
+							</div>
+	</div>	
+							</div>
+			<div class="form-footer col-md-10 col-md-offset-1">
+				<div class="form-group button-group">
+					<button class='btn btn-info btn-back'>Back <i class='cp-spinner cp-eclipse '></i></button>
+					<button 
+	id=""
+	class='btn btn-info btn-repeat' 
+	data-repeat="#grp-specified_portable_valuable .questions"
+	data-repeat-container="#grp-specified_portable_valuable"
+>+ SpecifiedPortableValuable <i class='cp-spinner cp-eclipse '></i>
+</button>					<button class='btn btn-success btn-submit submit'>Continue <i class='cp-spinner cp-eclipse '></i></button>
+				</div>
+			</div>
+			</form>
+		</div>
+	 
+		<div class="rfq-group hidden " id="tab-InsuranceHistory" >
+			<form method="POST" action="https://localhost/api/quotes/form/8F61A25E-1B5E-460A-969D-1BE8B0ACAB3F/83125B05-938F-432F-B272-EEAF18FBD097/validate/17946461-C2A1-E611-902E-000C292D0644?OrganizationID=de09f4b6-c708-4f5f-a48e-432af31e4d74" accept-charset="UTF-8"><input name="_token" type="hidden" value="SBVsn0OXLlKBhATbWSdVyUEe0O753Ywqm4duP4LI">
+			<h3 class="form-tab-header col-md-10 col-md-offset-1">Insurance History</h3>
+			<div class="form-fields col-md-10 col-md-offset-1">
+									<div class="form row">
+	<div class='questions' id='grp-insurance_history'>
+		<div class="Boolean HadInsuranceRefused required" 
+		 
+			data-formpath="InsuranceHistory"
+			id="qid-9E946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="InsuranceHistory-9E946461-C2A1-E611-902E-000C292D0644">i) Had insurance refused, cancelled, declined or special terms imposed?</label>
+				
+				<i class="label label-default">Data-driven question coz time periods may vary between underwriters.</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<div class="col-md-2">
+					<div class='wrapper'><div class='option'><input id="InsuranceHistory-9E946461-C2A1-E611-902E-000C292D0644--Y" checked="checked" name="InsuranceHistory[9E946461-C2A1-E611-902E-000C292D0644]" type="radio" value="Y"><label for="InsuranceHistory-9E946461-C2A1-E611-902E-000C292D0644--Y" class="label yes">Yes</label></div><div class='option'><input id="InsuranceHistory-9E946461-C2A1-E611-902E-000C292D0644--N" name="InsuranceHistory[9E946461-C2A1-E611-902E-000C292D0644]" type="radio" value="N"><label for="InsuranceHistory-9E946461-C2A1-E611-902E-000C292D0644--N" class="label no">No</label></div></div>
+				</div>
+					</div>
+			
+	</div>
+		<div class="Boolean WasBankrupt required" 
+		 
+			data-formpath="InsuranceHistory"
+			id="qid-9F946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="InsuranceHistory-9F946461-C2A1-E611-902E-000C292D0644">ii) Been declared bankrupt, placed in liquidation, receivership or voluntary administration?</label>
+				
+				<i class="label label-default">Data-driven question coz time periods may vary between underwriters.</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<div class="col-md-2">
+					<div class='wrapper'><div class='option'><input id="InsuranceHistory-9F946461-C2A1-E611-902E-000C292D0644--Y" checked="checked" name="InsuranceHistory[9F946461-C2A1-E611-902E-000C292D0644]" type="radio" value="Y"><label for="InsuranceHistory-9F946461-C2A1-E611-902E-000C292D0644--Y" class="label yes">Yes</label></div><div class='option'><input id="InsuranceHistory-9F946461-C2A1-E611-902E-000C292D0644--N" name="InsuranceHistory[9F946461-C2A1-E611-902E-000C292D0644]" type="radio" value="N"><label for="InsuranceHistory-9F946461-C2A1-E611-902E-000C292D0644--N" class="label no">No</label></div></div>
+				</div>
+					</div>
+			
+	</div>
+		<div class="Boolean WasConvicted required" 
+		 
+			data-formpath="InsuranceHistory"
+			id="qid-A0946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="InsuranceHistory-A0946461-C2A1-E611-902E-000C292D0644">Been convicted of or had any fines imposed for any crime involving drugs, dishonesty, arson, theft, fraud or violence against any person or property?</label>
+				
+				<i class="label label-default">Data-driven question coz time periods may vary between underwriters.</i>
+					</div>
+		<div class="col-md-12 form-group" >
+							<div class="col-md-2">
+					<div class='wrapper'><div class='option'><input id="InsuranceHistory-A0946461-C2A1-E611-902E-000C292D0644--Y" checked="checked" name="InsuranceHistory[A0946461-C2A1-E611-902E-000C292D0644]" type="radio" value="Y"><label for="InsuranceHistory-A0946461-C2A1-E611-902E-000C292D0644--Y" class="label yes">Yes</label></div><div class='option'><input id="InsuranceHistory-A0946461-C2A1-E611-902E-000C292D0644--N" name="InsuranceHistory[A0946461-C2A1-E611-902E-000C292D0644]" type="radio" value="N"><label for="InsuranceHistory-A0946461-C2A1-E611-902E-000C292D0644--N" class="label no">No</label></div></div>
+				</div>
+					</div>
+			
+	</div>
+		<div class="Text InsuranceHistoryDetails required isLinked hidden" 
+		 
+			data-linked="{&quot;9E946461-C2A1-E611-902E-000C292D0644&quot;:&quot;Y&quot;,&quot;9F946461-C2A1-E611-902E-000C292D0644&quot;:&quot;Y&quot;,&quot;A0946461-C2A1-E611-902E-000C292D0644&quot;:&quot;Y&quot;}"
+		 
+			data-formpath="InsuranceHistory"
+			id="qid-A1946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="InsuranceHistory-A1946461-C2A1-E611-902E-000C292D0644">If yes to any of the above questions please provide details or ring to discuss the matter:</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="InsuranceHistory-A1946461-C2A1-E611-902E-000C292D0644" name="InsuranceHistory[A1946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		
+						
+	</div>
+	
+
+			<div class="partials">
+							<h3 class="col-md-12">Claim History</h3>
+
+	<p class="col-md-12">In the last 5 years have you suffered any losses or otherwise or has any claims made against you ?</p>
+
+	<div class="form-group col-md-2">
+		<div class='wrapper'><div class='option'><input id="Claims-trigger--Y" name="Claims[trigger]" type="radio" value="Y"><label for="Claims-trigger--Y" class="label yes">Yes</label></div><div class='option'><input id="Claims-trigger--N" checked="checked" name="Claims[trigger]" type="radio" value="N"><label for="Claims-trigger--N" class="label no">No</label></div></div>
+	</div>
+	<div class="claims-container col-md-12 hidden">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="col-md-2" style="width: 5%;"></th>
+					<th class="col-md-3" style="width: 18%">Insurer</th>
+					<th class="col-md-4" style="width: 25%" colspan='2'>Insurance Period <br/>(Begin - End)</th>
+					<th class="col-md-2" style="width: 13%">Claim Quantity</th>
+					<th class="col-md-2" style="width: 13%">Amount Paid</th>
+					<th class="col-md-2" style="width: 13%">Outstanding</th>
+					<th class="col-md-2" style="width: 13%">Total</th>
+				</tr>
+			</thead>
+			<tbody id="claim-list-container">
+								<tr 
+					class="claims-list"
+					data-repeat-match='Claims.Claims'
+					data-repeat-index=0
+					id="Claims-Claims-0-x"
+					>
+					<td>
+						<button data-remove='#Claims-Claims-0-x' class="pull-right"><i class="fa fa-trash-o">&nbsp;</i></button>
+					</td>
+					<td class="form-group">
+						<input class="form-control" id="Claims-Claims-0-InsurerCompanyName" name="Claims[Claims][0][InsurerCompanyName]" type="text">
+					</td>
+					<td class="form-group">
+						<input placeholder="From" class="date form-control" id="Claims-Claims-0-InsurancePeriodBeginDate" name="Claims[Claims][0][InsurancePeriodBeginDate]" type="text">
+					</td>
+					<td>
+						<input placeholder="To" class="date form-control" id="Claims-Claims-0-InsurancePeriodEndDate" name="Claims[Claims][0][InsurancePeriodEndDate]" type="text">
+					</td>
+					<td class="form-group">
+						<input class="form-control" id="Claims-Claims-0-ClaimQty" name="Claims[Claims][0][ClaimQty]" type="number">
+					</td>
+					<td class="amnt-paid form-group">
+						<input class="form-control" id="Claims-Claims-0-AmountPaid" name="Claims[Claims][0][AmountPaid]" type="number">
+					</td>
+					<td class="amnt-outstanding form-group">
+						<input class="form-control" id="Claims-Claims-0-AmountOutstanding" name="Claims[Claims][0][AmountOutstanding]" type="number">
+					</td>
+					<td class="total"></td>
+				</tr>
+							</tbody>
+		</table>
+	</div>
+
+					</div>
+	</div>	
+							</div>
+			<div class="form-footer col-md-10 col-md-offset-1">
+				<div class="form-group button-group">
+					<button class='btn btn-info btn-back'>Back <i class='cp-spinner cp-eclipse '></i></button>
+					<button 
+	id="claims-repeater"
+	class='btn btn-info btn-repeat' 
+	data-repeat=".claims-list"
+	data-repeat-container="#claim-list-container"
+>+ previous claims <i class='cp-spinner cp-eclipse '></i>
+</button>					<button class='btn btn-success btn-submit submit'>Continue <i class='cp-spinner cp-eclipse '></i></button>
+				</div>
+			</div>
+			</form>
+		</div>
+	 
+		<div class="rfq-group hidden last" id="tab-AdditionalInfo" >
+			<form method="POST" action="https://localhost/api/quotes/form/8F61A25E-1B5E-460A-969D-1BE8B0ACAB3F/83125B05-938F-432F-B272-EEAF18FBD097/validate/18946461-C2A1-E611-902E-000C292D0644?OrganizationID=de09f4b6-c708-4f5f-a48e-432af31e4d74" accept-charset="UTF-8"><input name="_token" type="hidden" value="SBVsn0OXLlKBhATbWSdVyUEe0O753Ywqm4duP4LI">
+			<h3 class="form-tab-header col-md-10 col-md-offset-1">Additional Information</h3>
+			<div class="form-fields col-md-10 col-md-offset-1">
+									<div class="form row">
+	<div class='questions' id='grp-additional_info'>
+		<div class="Text AdditionalInformation required" 
+		 
+			data-formpath="AdditionalInfo"
+			id="qid-0A946461-C2A1-E611-902E-000C292D0644"
+		>
+		<div class="col-md-12 question-disp">
+			<label for="AdditionalInfo-0A946461-C2A1-E611-902E-000C292D0644">For additional information please provide details below:</label>
+					</div>
+		<div class="col-md-12 form-group" >
+							<input class="form-control" id="AdditionalInfo-0A946461-C2A1-E611-902E-000C292D0644" name="AdditionalInfo[0A946461-C2A1-E611-902E-000C292D0644]" type="text">
+
+					</div>
+			
+	</div>
+		
+						
+	</div>
+	
+
+	</div>	
+							</div>
+			<div class="form-footer col-md-10 col-md-offset-1">
+				<div class="form-group button-group">
+					<button class='btn btn-info btn-back'>Back <i class='cp-spinner cp-eclipse '></i></button>
+										<button class='btn btn-success btn-submit submit'>Continue <i class='cp-spinner cp-eclipse '></i></button>
+				</div>
+			</div>
+			</form>
+		</div>
+		
+	</div>
+</div>
+
+<script id="moment" src="https://localhost/plugins/daterangepicker/moment.js"></script>
+
+<script id="bootstrap-datetimepicker" src="https://localhost/js/datetimepicker/bootstrap-datetimepicker.js"></script>
+<script>
+	$(document).ready(function() {
+		$('[name="Claims[trigger]"]').bind('change ifToggled', function() {
+			var me = $('[name="Claims[trigger]"]:checked');
+			if (me.val() === 'Y') $('.claims-container, #claims-repeater').removeClass('hidden');
+			else $('.claims-container, #claims-repeater').addClass('hidden');
+		}).change();
+
+		$('.amnt-paid input, .amnt-outstanding input').on('change', function() {
+			var me = $(this);
+			var parent = me.parent('.form-group');
+			var sibling = parent.siblings('.amnt-outstanding,.amnt-paid');
+			var paidOrOT = parent.find('input').val() || 0;
+			var otOrPaid =	sibling.find('input').val() || 0;
+			
+			parent.siblings('.total').text(parseInt(paidOrOT) + parseInt(otOrPaid));
+		});
+	});
+</script>	
+<script>
+	$(document).ready(function() {
+		$('#Covers-Cover-optional-trigger').bind('change ifToggled', function() {
+			var me = $(this);	
+				if (me.is(':checked')) me.parents('.hidden-trigger').siblings('.covers-cover').removeClass('hidden');
+				else me.parent().siblings('.covers-cover').addClass('hidden');
+		}).change();
+		$('#Covers-Set').bind('change', function() {
+			var me = $(this);
+			$('.cover-set-levels .cover-set-level').addClass('hidden');
+			$('#cover-set-level-'+$(this).val()).removeClass('hidden');
+		}).change();
+	});
+</script>	
+
+<script id="linked-questions">
+	$(document).ready(function() {
+		var findAndLinkQuestion = function(qid, baseKey, source) {
+			var formPath = function(qid, baseKey) {
+				var base = baseKey.split('.');
+				var strbase = base.shift();
+
+				base.push(qid);
+
+				// make input name for the linked question
+				for(var i in base) strbase += '['+ base[i] +']';
+				return strbase;	
+			}
+
+			var toggleSources = function() {
+				var me = $(this), val = null;
+				var getChexboxValue = function(name) {
+					// make sure we get the real value if the checkbox value is not 
+					// the same as the index same we set the value also as index in the backend
+					var base = name.match(/\[([a-z0-9\-]+)\]$/i);
+					return base ? base[1] : null;
+				}
+				// since we bind to all input we skip unchecked ones
+				if (me.attr('type') === 'radio' && !me.is(':checked')) return;
+
+				// for checkbox deny if not checked 
+				if (me.attr('type') === 'checkbox' && !me.is(':checked')) 
+					val = '';
+				else val = me.val();
+
+				var sources = me.data('sources') || [];
+
+				sources.forEach(function(el, index) {
+					var source = $(el),
+						expected = source.data('expected') || null,
+						links = source.data('links');
+					expected = !$.isArray(expected) ? [expected] : expected;
+
+					if (-1 !== $.inArray(val, expected)) 
+						return source.removeClass('hidden');
+					else if (links.length <= 1)
+						return source.addClass('hidden');
+					
+					var cnt = 0;
+					links.forEach(function(e, i) {
+						var el = function(e) {
+							var n = null;
+							e.each(function() {
+								var ee = $(this);
+								if ((ee.attr('type') == 'radio' 
+									|| ee.attr('type') == 'checkbox')
+									&& ee.is(":checked")) {
+									n = this;
+								}
+							});
+							return $(n);
+						}
+						var e = el(e), c = e.val() || null;
+
+						// linked question will show if any of the links are matched 
+						// to expexted value otherwise hide the element
+						if (-1 === $.inArray(c, expected)) cnt++;
+					});
+					if (cnt == links.length) source.addClass('hidden');
+				});
+			}
+			var nodeEl = function(name) {
+				return $('[name="'+name+'"]');
+			}
+			var checkboxes = function(name, source, node) {
+
+				// checkboxes are specials since we set the key/ID as index
+				// but since we also set the value same as index so gtting the value 
+				// is not an issue
+				name += '['+ (source.data('expected') || '') +']';
+				return {
+					name: name,
+					node: nodeEl(name)
+				}
+			}
+			var name = formPath(qid, baseKey);
+			var node = nodeEl(name);
+
+			if (!node.length) {
+				var nn = checkboxes(name, source);
+				name = nn.name;
+				node = nn.node;
+			}
+			
+			var getLinkedRegistry = function(node) {
+				if (node.data('Linked')) return node.data('Linked');
+
+				var linked = {
+					qid: qid,
+					baseKey: baseKey,
+					name: name,
+					node: node,
+					el: function() {
+						if (this.node) return this.node;
+						return this.node = node;
+					},
+					isLinked: function() {
+						return this.el().length;
+					},
+					sources: function() {
+						return this.el().data('sources') || []
+					},
+					addSource: function(el) {
+						var node = this.el();
+						var data = node.data('sources') || [];
+
+						data.push(el);
+						node.data('sources', data);
+
+						var links = el.data('links') || [];
+						links.push(node);
+						el.data('links', links);
+
+						return this;
+					}
+				};
+				node.data('Linked', linked);
+				return linked;
+			};
+			var linked = getLinkedRegistry(node).addSource(source);
+			node.bind('change ifToggled', toggleSources).change();
+			return node;
+		}
+
+		$('.isLinked').each(function() {
+			var me = $(this);
+			var linked = null;
+			var dataLinked = me.data('linked') || {};
+			var formPath = me.data('formpath');
+			for(var i in dataLinked) {
+				findAndLinkQuestion(i, formPath, me.data('expected', dataLinked[i]));
+			}
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		var incrementInputIndexes = function(repeated, baseIndex) {
+			var match = repeated.data('repeat-match');
+			if (!match) return repeated;
+			function incrementID(ID, baseKey, index) {
+				var baseKey = baseKey.replace(/(\[\]|\.|\[|\])/, '-');
+				var indexBase = ID.replace(baseKey, "");
+				return baseKey + indexBase.replace(/^\-(\d+)/, "-" + index);
+			}
+
+			function incrementName(Name, baseKey, index) {
+				var segments = baseKey.split('.');
+				var baseKey = segments.shift();
+				for(var i in segments) baseKey += '\[' + segments[i] + '\]';
+				var indexBase = Name.replace(baseKey, "");
+				return baseKey + indexBase.replace(/^\[(\d+)\]/, "[" + index + "]");
+			}
+			function incrementToggleOrRemove(Href, baseKey, index) {
+				var baseKey = baseKey.replace(/(\[\]|\.|\[|\])/, '-');
+				var Href = Href.substring(1);
+				var indexBase = Href.replace(new RegExp("^("+baseKey+"-)"), "");
+				return '#' + baseKey + indexBase.replace(/^(\d+)/, "-" + index);
+			}
+			repeated.find('label, input, select, textarea').each(function() {
+				var me = $(this).val("");
+				me.siblings('.label.label-alert').remove();
+				if (me.attr('id')) me.attr('id', incrementID(me.attr('id'), match, baseIndex));
+				if (me.attr('for')) me.attr('for', incrementID(me.attr('for'), match, baseIndex));
+				if (me.attr('name')) me.attr('name', incrementName(me.attr('name'), match, baseIndex));
+			});
+			repeated.find('[data-toggle], [data-remove], [data-toggle-area]').each(function() {
+				var me = $(this);
+				if (me.attr('data-toggle')) me.attr('href', incrementToggleOrRemove(me.attr('href'), match, baseIndex));
+				if (me.attr('data-remove')) me.attr('data-remove', incrementToggleOrRemove(me.attr('data-remove'), match, baseIndex));
+				if (me.attr('data-toggle-area')) me.attr('id', incrementID(me.attr('id'), match, baseIndex));
+			});
+
+			repeated.attr('id', incrementID(repeated.attr('id'), match, baseIndex));
+			repeated.attr('data-repeat-index', baseIndex);
+			return repeated;
+		}
+		$(document).on('click', '[data-remove]', function() {
+			var button = $(this);
+			var me = $(button.attr('data-remove'));
+			if (me.siblings(':not('+button.attr('data-remove')+')').length) me.fadeOut().remove();
+			return false;
+		});
+		$(document).on('click', '[data-jtoggle]', function() {
+			var button = $(this);
+			var me = $(button.attr('data-jtoggle')).toggleClass('in');
+			return false;
+		});
+		$(document).on('click', 'button.btn-repeat:not(.disabled)', function() {
+			var me = $(this).addClass('disabled');
+			var toRepeat = me.data('repeat') || false;
+			var container = $(me.data('repeat-container')) || false;		
+			var repeat = $(toRepeat+':last');
+
+			if (!repeat.length || !container.length)
+				return false;
+
+			var title = repeat.data('repeat-title') || false;	
+			
+			var baseIndex = (repeat.data('repeat-index') || 0) + 1;
+			var clone = repeat.clone();	
+			var title = clone.find(title);
+			incrementInputIndexes(clone, baseIndex);
+			if (title.length) {
+				var html = title.html();
+				var num = html.match(/\#(\d+)/);
+				title.html(html.replace(/\#(\d+)/, '#' + ((num ? parseInt(num[1]) : baseIndex) + 1)));
+			}
+			clone.insertAfter(repeat);
+			me.removeClass('disabled');
+			return false;	
+		});
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$(document).on('click', '.btn.submit, button.button, a.btn', function() {
+			if (!$(this).attr('disabled'))
+				$(this).attr('disabled', true);
+			if (this.tagName !== 'A')
+			$('form').submit();
+		});
+
+		// TODO: remove disable is detect changes in input values
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('.date').datetimepicker({
+			format: 'M/D/YYYY'
+		});
+		$('.datetime').datetimepicker({
+			format: 'M/D/YYYY HH:II'
+		});
+	});
+</script>
+
+<script>
+	$(document).ready(function() {
+		$('.date').datetimepicker({
+			format: 'M/D/YYYY'
+		});
+		$('.datetime').datetimepicker({
+			format: 'M/D/YYYY HH:II'
+		});
+	});
+</script>
+
+<script>
+	(function($){
+		var jsteps = $.fn.jsteps = function(options) {
+
+			if (typeof jsteps[options] === 'function') {
+				return jsteps[options].apply(this, Array.prototype.slice.call(arguments, 1));
+			}
+
+			var options = $.extend(true, {
+				tabs: '',
+				panels: '',
+				startIndex: 0,
+				onBeforeChange: function(prev, next) {},
+				onChanged: function(step) {}
+			}, options);
+
+			return this.each(function () {
+				var container = $(this);
+
+				var state = {
+					currentIndex : options.startIndex,
+					currentStep : null,
+					stepCount: 1
+				}
+				var panels = container.find(options.panels).addClass('hidden');
+				var tabs = container.find(options.tabs).each(function(i,e) {
+					$(this)
+						.data('jindex', i);
+				}).removeClass('active');
+
+				state.totalSteps = tabs.length;
+
+				var activeTab = tabs.get(options.startIndex);
+				var activePanel = panels.get(options.startIndex);
+
+				$(activeTab).addClass('active');
+				$(activePanel).removeClass('hidden');
+
+				tabs.click(function(){
+					jsteps.ajaxStep.apply(container, [$(this).data('jindex') || 0]);
+				});
+
+				container.data('jsteps', {
+					'state': state,
+					'options': options
+				});
+			});
+		}
+
+		jsteps.next = function() {
+			var container = $(this);
+			var data = container.data('jsteps');
+
+			var index = data.state.currentIndex + data.state.stepCount;
+
+			if (index >= data.state.totalSteps)
+				index = data.state.currentIndex;
+
+			jsteps.step.apply(this, [index]);
+		}
+
+		jsteps.prev = function() {
+			var container = $(this);
+			var data = container.data('jsteps');	
+
+			var index = data.state.currentIndex - data.state.stepCount;
+
+			if (index <= 0)
+				index = 0;
+
+			jsteps.step.apply(this, [index]);
+		}
+
+		jsteps.step = function(index) {
+			var container = $(this);
+			var data = container.data('jsteps');
+
+			index = index <= 0 ? 0 : (index >= data.state.totalSteps ? data.state.totalSteps - 1: index);	
+
+			if (false === data.options.onBeforeChange.apply(this, [data.state.currentIndex, index])) {
+				return this;
+			}
+
+			var tabs = container.find(data.options.tabs).removeClass('active');
+			var panes = container.find(data.options.panels).addClass('hidden');
+
+			$(tabs.get(index)).addClass('active');
+			var active = $(panes.get(index)).removeClass('hidden');
+
+			location.hash = active.attr('id');
+
+			data.state.currentIndex = index;
+			container.data('jsteps', data);
+			data.options.onChanged.apply(this, [index]);			
+		}
+
+		jsteps.ajaxStep = function(next, callback) {
+			var container = $(this);
+			var options = $.extend(true, jsteps.ajaxStep.options, container.data('ajaxStep') || {});
+			var data = container.data('jsteps');
+
+			if (data.state.currentIndex < next) {
+				for(var i = data.state.currentIndex + data.state.stepCount; i < next; ) {
+					if ($.inArray(i, options.validated))
+						return;
+					i += data.state.stepCount;
+				}
+
+				if (options.ajaxing) return;
+
+				options.validating 	= data.state.currentIndex;
+				options.step 		= next;
+				options.ajaxing		= true;
+				options.callback 	= callback || function() {};
+
+				var tab = container.find('.form-tab-contents .rfq-group').get(data.state.currentIndex);
+				options.form = $(tab).children('form');
+
+				container.data('ajaxStep', options);
+
+				$.ajax({
+					url: options.form.attr('action'),
+					data: options.form.serializeArray(),
+					type: 'get',
+					dataType: 'json',
+					cache: false,
+					success: function(result) {
+
+						if (options.form) options.form.find('span.error.label').remove();
+
+						var step 		= options.step;
+
+						options.callback.apply(container, [options.step, options.form, result]);						
+
+						options.ajaxing = false;
+						options.step 	= null;
+						options.form 	= null;
+						
+						// clear errors first
+						container.find('.has-error').removeClass('has-error');
+
+						if (result.success === true && -1 === $.inArray(options.validating, options.validated)) {
+							options.validated.push(step);
+						}
+						else if (!result.success) {
+							ErrorHandler(result);
+
+							if (-1 !== (index = $.inArray(options.validating, options.validated))) {
+								options.validated = options.validated.splice(index, 1);
+							}
+						}	
+
+						container.data('ajaxStep', options);
+						if (result.success)
+							$(container).jsteps('step', step);	
+					},
+					error: function(xhr) {
+						options.ajaxing = false;
+						options.step = null;
+						options.form = null;
+
+						container.data('ajaxStep', options);
+					}
+				});	
+			}
+			else {
+				$(container).jsteps('step', next);
+			}
+		}
+
+		jsteps.ajaxStep.options = {
+			ajaxing : false,
+			step: null,
+			form: null,
+			validating: null,
+			validated: [],
+			callback: function() {}
+		};
+
+		jsteps.ajaxStep.container = null;
+
+		var ErrorHandler = function(result) {
+			var getFieldNames = function(items, base, container) {
+				container = container || [];
+
+				for(var i in items) {
+					var key = base +'['+ i +']';
+
+					if (typeof items[i] === 'object') {
+
+						if ($.isArray(items[i])) {
+							var isString = items[i].shift();
+
+							if (typeof isString === 'string') {
+								container[key] = isString;	
+								continue;
+							}
+							items[i].unshift(isString);
+						}
+						getFieldNames(items[i], key, container);
+					}
+					else {
+						if (/(\d+)/.test(i) === false) {
+							if (typeof container[key] !== 'array')
+								container[key] = [];
+							container[key].push(items[i]);
+						}
+						else container[key] = items[i];
+					}
+				}
+				return container;
+			}
+			for(var i in result) {
+				var fields = getFieldNames(result[i], i);
+				for(var i in fields) {
+					var inp = $('[name="'+ i +'"]');
+					var msg = $.isArray(fields[i]) ? msg = fields[i][0] : fields[i];
+					var parent = null;
+					if (!inp.length) {
+						var val = i.match(/\[([a-z\-0-9]+)\]$/i);
+						
+						if (val) {
+							var inp = $('#qid-'+val[1]+' .question-disp > label');
+						}
+					} else {
+						parent = inp.parents('.form-group:first')
+					}
+					inp.parents('.form-group').addClass('has-error');
+
+					if (inp.attr('type') !== 'radio')
+						$("<span class='error label label-alert'>"+ msg +"</span>").insertAfter(inp);
+				}
+			}
+		}
+
+	})(jQuery);
+
+	$(document).ready(function(){
+
+		var submit = function(step, result) {
+			var container = $(this);
+			var ajaxOptions = container.data('ajaxStep') || {};
+
+			ajaxOptions.submitting = true;
+			container.data('ajaxStep', ajaxOptions);
+			$.ajax({
+				url: 'https://localhost/api/quotes/form/8F61A25E-1B5E-460A-969D-1BE8B0ACAB3F/83125B05-938F-432F-B272-EEAF18FBD097/submit?OrganizationID=de09f4b6-c708-4f5f-a48e-432af31e4d74',
+				type: 'get',
+				dataType: 'json',
+				cache: false,
+				success: function(result) {
+					if (result.success) {
+						if (typeof window.RFQFormCallback === 'function')
+							return RFQFormCallback.apply(container, [result]);
+						else alert('Your RFQID: '+ result.RFQID);
+					}
+				},
+				error: function(xhr) {
+					if (typeof window.RFQFormCallback === 'function')
+						return RFQFormCallback.apply(container, [{error: '"Ops! Something wen\'t wrong, please try again later."'}]);
+					else alert("Ops! Something wen't wrong, please try again later.");
+				}
+			});
+		};
+
+		$('.btn-back').click(function() {
+			$('.rfq-form').jsteps('prev');
+			return false;
+		});
+		$('.btn-submit:last').addClass('last');
+		$('.btn-submit').click(function() {
+			var me = $(this).attr('disabled', true);
+			me.siblings().attr('disabled', true);
+			me.addClass('spin');
+			var data = $('.rfq-form').data('jsteps');
+
+			var callback = $(this).hasClass('last') ? submit : function(step, form, result) {
+				if (form) {
+					form.find('.btn')
+						.removeClass('spin')
+						.attr('disabled', false);
+				}
+			};
+
+			$('.rfq-form').jsteps('ajaxStep', data.state.currentIndex + data.state.stepCount, callback);
+			return false;
+		});
+
+
+		$('.rfq-form').jsteps({
+			tabs: '.form-tabs li',
+			panels: '.form-tab-contents .rfq-group',
+			startIndex: 2,
+			onBeforeChange: function(step) {
+				var container = $(this);
+				var ajaxOptions = container.data('ajaxStep') || {};
+
+				if (ajaxOptions.submitting) {
+					return false;
+				}
+				return true;	
+			}
+		});
+	});
+</script>

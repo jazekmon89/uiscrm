@@ -1,0 +1,343 @@
+//colors
+$color_athens_gray_approx: #ebeff2;
+$color_leather_approx: #9b784e;
+$black_40: rgba(0, 0, 0, 0.4);
+$color_burnt_maroon_approx: #460000;
+$white: #ffffff;
+$color_del_rio_approx: #ad9595;
+$color_marigold_approx: #c79335;
+$color_barley_corn_approx: #a8855e;
+$color_buttercup_approx: #f2a314;
+$color_meteor_approx: #cd870a;
+$color_mai_tai_approx: #aa6e05;
+$color_chelsea_gem_approx: #965f06;
+$black_10: rgba(0,0,0,.1);
+$color_gallery_approx: #eee;
+$color_golden_bell_approx: #d88a04;
+
+//fonts
+$font_0: Raleway;
+$font_1: sans-serif;
+$font_2: Open Sans;
+
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	background: $color_athens_gray_approx;
+	min-width: 320px;
+	font: 13px/1.5 "Raleway", Helvetica, sans-serif;
+	line-height: 1.5;
+}
+.bem-text_left {
+	text-align: left;
+}
+.bem-text_center {
+	text-align: center;
+}
+.bem-text_right {
+	text-align: right;
+}
+.bem-header {
+	position: fixed;
+	width: 100%;
+	z-index: 8999;
+	.bem-header__top {
+		padding: 8px 0;
+		height: 36px;
+	}
+}
+.bem-header__top_light-brown {
+	background: $color_leather_approx;
+}
+.bem-logo__container {
+	margin: 0;
+	position: relative;
+}
+.bem-logo__image {
+	position: relative;
+	a {
+		margin: 0 auto;
+		display: block;
+		img {
+			margin: 0 auto;
+			display: block;
+			width: 155px;
+			height: 160px;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all 0.4s ease-in-out;
+		}
+	}
+}
+.bem-header__bottom {
+	padding: 0.75em 0;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 2px 5px 0 $black_40;
+	.navbar-nav {
+		display: inline-block;
+		float: none;
+	}
+	.navbar-default {
+		margin: 0;
+		background-color: transparent;
+		border-color: transparent;
+		text-align: center;
+		.navbar-toggle {
+			margin-top: 12px;
+			border-color: transparent !important;
+			&:active {
+				background-color: transparent;
+			}
+			&:hover {
+				background-color: transparent;
+			}
+			&:focus {
+				background-color: transparent;
+			}
+			.icon-bar {
+				background-color: $color_leather_approx !important;
+				&:hover {
+					color: $color_barley_corn_approx !important;
+				}
+			}
+		}
+		ul li a {
+			color: $white;
+			font-size: 11px;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all 0.7s ease-in-out;
+			&:hover {
+				color: $color_del_rio_approx;
+			}
+			&:active {
+				color: $color_marigold_approx;
+			}
+		}
+	}
+	.fa-search {
+		color: $white !important;
+		margin: 12px 0;
+		font-size: 20px;
+		cursor: pointer;
+	}
+}
+.bem-header__bottom_maroon {
+	background: $color_burnt_maroon_approx;
+	font-family: $font_0, $font_1;
+	.navbar-collapse.in {
+		background: $color_burnt_maroon_approx;
+		text-align: center;
+	}
+}
+.bem-contact-details__container {
+	list-style-type: none;
+	text-align: center;
+	float: none;
+	> li {
+		display: inline;
+	}
+	li:last-child {
+		margin-left: 20px;
+	}
+	.bem-contact-details_phone-number span {
+		color: $white;
+		font: bold 13px/1.0em $font_2, $font_1;
+	}
+	.bem-contact-details_email a {
+		color: $white;
+		font: bold 13px/1.0em $font_2, $font_1;
+		//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+		transition: all 0.7s ease-in-out;
+		&:hover {
+			opacity: 0.7;
+			text-decoration: none;
+		}
+	}
+}
+.bem-user-menu__container {
+	margin: 0;
+	padding: 13px 18px;
+	background: $color_buttercup_approx;
+	z-index: 100;
+	float: right;
+	.dropdown-menu {
+		margin: 0;
+		padding: 0;
+		background: $color_buttercup_approx;
+		left: auto;
+		right: -18px;
+		border: 0;
+		z-index: 8999;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 0;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 3px;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: none;
+		overflow: hidden;
+		> li {
+			width: 250px;
+			a {
+				padding: 12px 30px;
+				color: $white;
+				//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+				transition: all 0.4s ease-in-out;
+			}
+		}
+	}
+	.bem-dropdown-menu_first {
+		font-weight: 800;
+		a {
+			padding: 12px 30px;
+			color: $color_burnt_maroon_approx !important;
+			font-weight: bold;
+			&:hover {
+				background: $color_leather_approx;
+			}
+		}
+	}
+	.bem-dropdown-menu_white {
+		background: $color_meteor_approx;
+		border-bottom: 1px solid $color_mai_tai_approx;
+		&:last-child {
+			border: 0;
+		}
+		> a:hover {
+			background: $color_chelsea_gem_approx;
+		}
+		> li a {
+			padding: 1px 30px;
+			color: $white;
+			//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+			transition: all 0.4s ease-in-out;
+		}
+	}
+	.fa-chevron-down {
+		margin-top: 0;
+		margin-right: 0;
+		float: right;
+		font-size: 10px;
+	}
+	.dropdown-toggle {
+		margin: 0 auto;
+		width: 35px;
+		height: 35px;
+		display: block;
+		//Instead of the line below you could use @include box-sizing($bs)
+		box-sizing: border-box;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 50%;
+		border: 1px solid $white;
+		overflow: hidden;
+	}
+	.fa-user {
+		font-size: 3.25em;
+		color: $color_burnt_maroon_approx;
+	}
+}
+.bem-search-form__container {
+	overflow: hidden;
+	margin: 0 auto;
+	position: relative;
+	width: 100%;
+	display: block;
+	opacity: 0;
+}
+.bem-search-form {
+	background: rgba(0, 0, 0, 0) !important;
+	position: absolute;
+	top: -10px;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 1000;
+	border-color: $color_burnt_maroon_approx;
+	animation: none;
+}
+.bem-search-form__input {
+	background: transparent;
+	margin: auto;
+	padding: 5px;
+	top: 0;
+	right: 30px;
+	bottom: 0;
+	width: 100%;
+	font-size: 11px;
+	letter-spacing: 0.1em;
+	border: none;
+	color: $white !important;
+	text-transform: uppercase;
+	outline: none;
+}
+.bem-search-form__close-icon {
+	position: absolute;
+	margin-top: -28px;
+	right: 0;
+	.fa-close {
+		color: $white !important;
+		font-size: 26px;
+		cursor: pointer;
+	}
+}
+.bem-search-form__input::-webkit-input-placeholder {
+	color: $white !important;
+}
+.bem-page__container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.bem-page__heading-container {
+	margin: 300px 0 15px;
+	border-bottom: 1px solid $color_athens_gray_approx;
+	font-size: 22px;
+}
+.bem-page__container-grid {
+	padding: 30px;
+}
+.bem-page__container-row {
+	margin: 20px 0;
+}
+.bem-page__container-white {
+	background: $white;
+}
+.bem-page__container-rounded {
+	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+	border-radius: 3px;
+	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	box-shadow: 0 1px 1px $black_10;
+}
+.bem-page__heading-text {
+	padding-bottom: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: $color_burnt_maroon_approx;
+	border-bottom: 1px solid $color_gallery_approx;
+}
+.bem-footer {
+	margin-top: 30px;
+	padding: 25px 0;
+	background: $color_burnt_maroon_approx;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	color: $white;
+	.bem-footer__copyright a {
+		color: $color_golden_bell_approx;
+		//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+		transition: all 0.4s ease-in-out;
+		&:hover {
+			text-decoration: none;
+			color: $color_mai_tai_approx;
+		}
+	}
+}
+.bem-header__top .bem-row {
+	margin: 0;
+}
+.bem-page__container-tabs .nav-tabs {
+	background-color: $color_buttercup_approx;
+}

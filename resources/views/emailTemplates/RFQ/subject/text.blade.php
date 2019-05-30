@@ -1,0 +1,1 @@
+{{ array_get($RFQ, "RFQRefNum") }} {{ array_get($RFQ, "PolicyType.DisplayText") }} {{ $name }}

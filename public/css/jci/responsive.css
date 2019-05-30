@@ -1,0 +1,190 @@
+@media (max-width: 1200px) and (min-width: 968px) {
+	.bem-page__container-tabs .policy {
+	    height: 350px;
+	}	
+}
+@media (max-width: 1024px) {
+	.bem-page__container-tabs .bem-tabs__link-box {
+		margin: 30px 0;
+	}
+	.bem-form__container-md {
+		width: 100%;
+	}
+	.bem-header__bottom .navbar-nav > li > a{
+		padding-top: 40px;
+		padding-bottom: 20px;
+	}
+}
+@media (max-width: 1024px) and (min-width: 769px) {
+	.bem-header__bottom .navbar-nav > li {
+	    padding: 0 !important;
+	}	
+	.bem-header__bottom .fa-search {
+		margin: 40px 0;
+	}
+}
+@media (max-width: 992px) {
+	.Address.BusinessAddress {
+	    height: auto;
+	}
+}
+@media (max-width: 768px) {
+	.bem-form__container-sm {
+		width: 100%;
+	}
+	.bem-logo__image a {
+		position: relative;
+	}
+	.bem-logo__image a img {
+	    width: 90px;
+	    height: 95px;
+	}
+	.bem-header {
+	    position: relative;
+	}
+	.bem-header__bottom .navbar-nav {
+	    margin-left: 0 !important;
+	}
+	.bem-header__bottom .navbar-default .navbar-collapse {
+		border-top: 1px solid #2b0000 !important;
+	}
+	.bem-header__bottom_maroon .navbar-collapse.in {
+		padding-right: 0;
+		padding-left: 0;
+	}
+	.bem-header__bottom_maroon .navbar-collapse.in ul li a {
+		border-bottom-color: transparent !important;
+	}
+	.bem-header__bottom_maroon .navbar-nav {
+		margin-top: 30px;
+	}
+	.bem-header .bem-header__top {
+		padding: 6px;
+	    height: auto;
+	}
+	.bem-page__heading-container {
+	    margin: 15px 0;
+	}
+	.bem-contact-details__container {
+		margin-bottom: 0 !important;
+		text-align: left;
+	}
+	.bem-search-form__container,
+	.bem-header__bottom_maroon .navbar-nav li:last-child {
+		display: none;
+	}
+	.bem-page__container-tabs .policy {
+		height: auto;
+	}
+	.bem-welcome-page__heading-container {
+	    margin: 75px auto;
+	}
+	.bem-welcome-page__heading {
+		font-size: 32px !important;
+	}
+	.bem-page__container-tabs .tab-content {
+		margin: 0 30px;
+	}
+	.bem-social__btn {
+		font-size: 12px;
+	}
+	.bem-social__btn.btn-google .fa-google-plus, 
+	.bem-social__btn.btn-facebook .fa-facebook {
+		font-size: 20px;
+		width: 60px;
+	}
+	.bem-inquiry-social__btn.btn-facebook,
+	.bem-inquiry-social__btn.btn-google {
+	    margin: 15px 0 15px;
+	    width: 100%;
+	}
+	.bem-inquiry-social__btn-container {
+		float: none !important;
+	}
+	.bem-header__bottom .navbar-nav > li > a{
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+}
+@media (max-width: 767px) {	
+	.sm-table-responsive {
+	    margin-bottom: 16.5px;
+	    width: 100%;
+	    min-height: 0.01%;
+	    height: 450px;
+	    overflow-x: auto;
+	    overflow-y: hidden;    
+	    -ms-overflow-style: -ms-autohiding-scrollbar;
+	    border: 1px solid #ddd;
+	}
+	.claims-container .form-control {
+        width: inherit !important;
+    }
+}
+@media (max-width: 480px) {	
+	.bem-footer {
+		height: 90px;
+	}
+	.bem-footer .bem-footer__version {
+		float: left !important;
+	}
+	.bem-contact-details__container {
+		padding-left: 0;
+		text-align: center;
+	}
+	.bem-contact-details__container > li {
+		display: block;
+	}	
+	.bem-welcome-page__heading {
+		font-size: 20px !important;
+	}
+	.bem-social__btn.btn-google .fa-google-plus, 
+	.bem-social__btn.btn-facebook .fa-facebook {
+		font-size: 14px;
+		width: 50px;
+	}
+	.bem-social__btn {
+		font-size: 10px !important;
+	}
+	.coc-download-button button {
+		font-size: 11px !important;
+	}
+	/* 
+	* =rfq-motor-vehicle=
+	*/
+	/*.SelectOne.BusinessType {
+		display: inherit;
+	}*/
+}
+@media (max-width: 320px) {
+	.bem-footer {
+		height: 120px;
+	}
+}
+/*@media (min-width: 1224px) {
+    .container {
+        width: 1440px;
+    }
+}*/
+@media (min-width: 1200px) {
+	.address-wrapper .col-md-4 .col-md-6 {
+        width: 50% !important;
+    }
+}
+@media (min-width: 992px) {
+	.address-wrapper .col-md-6 {
+        width: 58.3333333333%;
+    }
+    .address-wrapper .col-md-4 .col-md-6 {
+    	width: 100%;
+    }
+    .address-wrapper .col-md-4 {
+        width: 35.6666666667%
+    }	
+}
+@media (min-width: 768px) {
+	.bem-header__bottom .navbar-nav > li {
+	    float: left;
+	    padding: 20px;
+	}	
+}
